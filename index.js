@@ -1,37 +1,28 @@
-const http = require('http');
-const fs = require('fs');
-const url = require('url');
+const express = require('express');
+const path = require('path');
+
+const app = express();
 const port = 8080;
 
-const renderPage = (src, res) => {
-  fs.readFile(src, (err, data) => {
-    if (err) throw err;
-    res.write(data);
-    res.end();
-  })
-}
 
-http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url, true);
-  const path = parsedUrl.pathname;
-  console.log(path);
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/index.html'));
+})
 
-  res.writeHead(200, { 'Content-Type': 'text/html' });
+app.get('/index.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '/index.html'));
+})
 
-  switch (path) {
-    case '/':
-      renderPage('./index.html', res);
-      break;
+app.get('/about.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '/about.html'));
+})
 
-    case '/about.html':
-    case '/contact-me.html':
-      renderPage(`.${path}`, res);
-      break;
+app.get('/contact-me.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '/contact-me.html'));
+})
 
-    default:
-      res.writeHead(404, { 'Content-Type': 'text/html' });
-      renderPage('./404.html', res);
-      break;
-  }
-  
-}).listen(port, (err) => err ? console.log(`Something went wrong: ${err}`) : console.log(`Server running on port ${port}`));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/404.html'));
+})
+
+app.listen(port, () => console.log(`Server running on http://localhost:${port}/`));

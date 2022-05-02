@@ -1,0 +1,26 @@
+{
+  "name": "basic-information-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anon-legion/basic-node-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anon-legion/basic-node-server/issues"
+  },
+  "homepage": "https://github.com/anon-legion/basic-node-server#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0",
+    "nodemon": "^2.0.16"
+  }
+}
